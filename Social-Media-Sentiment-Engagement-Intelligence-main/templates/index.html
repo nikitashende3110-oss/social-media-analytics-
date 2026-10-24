@@ -91,6 +91,31 @@
             padding: 16px 0; border-bottom: 1px solid #293551;
         }
         .post:last-child { border-bottom: 0; padding-bottom: 0; }
+        .predict-input {
+    width: 100%;
+    padding: 13px;
+    margin: 12px 0;
+    border-radius: 10px;
+    border: 1px solid #35405b;
+    background: #0b1020;
+    color: #eef2ff;
+    font-size: 14px;
+}
+.predict-btn {
+    padding: 11px 16px;
+    border: 0;
+    border-radius: 9px;
+    background: linear-gradient(90deg, #818cf8, #22d3ee);
+    color: #0b1020;
+    font-weight: bold;
+    cursor: pointer;
+}
+.prediction-result {
+    margin-top: 15px;
+    padding: 12px;
+    background: #1e3150;
+    border-radius: 10px;
+}
         .tag {
             display: inline-block; font-size: 11px; padding: 6px 9px;
             border-radius: 15px; margin-top: 10px;
@@ -226,7 +251,33 @@
                 </div>
             </section>
         </div>
+<section class="card" style="margin-top:20px;">
+    <h2 class="section-title">🤖 Live Sentiment Prediction</h2>
+    <div class="muted">
+        Enter a social media post and let your trained ML model predict its sentiment.
+    </div>
 
+    <form method="POST" action="/predict">
+        <textarea
+            class="predict-input"
+            name="text"
+            rows="3"
+            placeholder="Example: I love this new app!"
+            required
+        ></textarea>
+
+        <button class="predict-btn" type="submit">
+            Analyze Sentiment
+        </button>
+    </form>
+
+    {% if prediction %}
+    <div class="prediction-result">
+        <strong>Predicted Sentiment:</strong>
+        {{ prediction.capitalize() }}
+    </div>
+    {% endif %}
+</section>
         <footer>
             Pulse Social Media Analytics · UI preview · Metrics and examples are placeholders, not live results.
         </footer>
